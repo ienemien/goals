@@ -62,6 +62,7 @@
 
 	<!-- THE GOALS =============================================== -->
 	<!-- hide these goals if the loading variable is true -->
+	<label>Search for: <input type="text" class="form-control input-sm" ng-model="criteria"></label>
 	<table class="table table-striped">
 		<thead>
 			<th>#</th>
@@ -69,9 +70,9 @@
 			<th>Done?</th>
 			<th>Delete</th>
 		</thead>
-		<tbody class="goal" ng-hide="loading" ng-repeat="goal in goals">
+		<tbody class="goal" ng-hide="loading" ng-repeat="goal in goals | filter:criteria">
 			<td>{{ goal.id }}</td>
-				<td><label ng-dblclick="editTitle(goal)">{{goal.title}}</label></td>
+				<td contenteditable="true" ng-blur="editTitle(goal.id, goal.newtitle)" ng-model="goal.newtitle">{{goal.title}}</td>
 				<td><input type="checkbox" name="done" ng-checked="{{ goal.done }}" ng-click="setDone(goal.id, goal.done)"></td>
 			<td><button class="btn btn-primary" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
 		</tbody>

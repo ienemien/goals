@@ -71,7 +71,7 @@
 		</thead>
 		<tbody class="goal" ng-hide="loading" ng-repeat="goal in goals">
 			<td>{{ goal.id }}</td>
-				<td contenteditable ng-change>{{ goal.title }}</td>
+				<td><label ng-dblclick="editTitle(goal)">{{goal.title}}</label></td>
 				<td><input type="checkbox" name="done" ng-checked="{{ goal.done }}" ng-click="setDone(goal.id, goal.done)"></td>
 			<td><button class="btn btn-primary" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
 		</tbody>

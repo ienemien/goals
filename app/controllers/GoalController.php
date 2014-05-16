@@ -39,7 +39,7 @@ class GoalController extends \BaseController {
 	{
 		$goal = Goal::findOrFail($id);
 		
-		//only set title if input is present
+		//only set title if title is present
 		if(Input::has('title')){
 			$goal->title = Input::get('title');
 		}

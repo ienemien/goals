@@ -46,7 +46,7 @@
 		<!-- Goal done? -->
 		<div class="checkbox">
 			<label>
-				<input type="checkbox" name="done" ng-model="goalData.done"> Done
+				<input type="checkbox" name="done" ng-model="goalData.done" value="false"> Done
 			</label>
 		</div>
 		
@@ -72,7 +72,7 @@
 		</thead>
 		<tbody class="goal" ng-hide="loading" ng-repeat="goal in goals | filter:criteria">
 			<td>{{ goal.id }}</td>
-				<td contenteditable="true" ng-blur="editTitle(goal.id, goal.newtitle)" ng-model="goal.newtitle">{{goal.title}}</td>
+				<td contenteditable="true" ng-blur="editTitle(goal.id, goal.title)" ng-model="goal.title"><span ng-bind="goal.title"></span></td>
 				<td><input type="checkbox" name="done" ng-checked="{{ goal.done }}" ng-click="setDone(goal.id, goal.done)"></td>
 			<td><button class="btn btn-primary" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
 		</tbody>

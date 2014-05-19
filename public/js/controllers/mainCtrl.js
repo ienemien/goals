@@ -50,14 +50,14 @@ angular.module('mainCtrl', [])
 		
 		// function to change the title of an existing goal
 		// SET TITLE ======================================================
-		$scope.editTitle = function(id, newtitle) {
+		/*$scope.editTitle = function(id, newtitle) {
 			$scope.loading = true;
 			$scope.newData.id = id;
 			$scope.newData.title = newtitle;
 			alert($scope.newData.id);
 			alert($scope.newData.title);
 			// save the goal
-			/*Goal.update(id, $scope.goalData)
+			Goal.update(id, $scope.goalData)
 				.success(function(data) {
 
 					// if successful, we'll need to refresh the Goal list
@@ -70,8 +70,8 @@ angular.module('mainCtrl', [])
 				})
 				.error(function(data) {
 					console.log(data);
-				});*/
-		};
+				});
+		};*/
 		
 		// function to set a goal as 'done'
 		// SET DONE ======================================================

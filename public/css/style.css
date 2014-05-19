@@ -1,0 +1,18 @@
+body { padding-top:30px; }
+form { padding-bottom:20px; }
+
+.edit-inline span {
+  cursor: pointer;
+}
+
+.edit-inline input {
+  display: none;
+}
+
+.edit-inline.active span {
+  display: none;
+}
+
+.edit-inline.active input {
+  display: inline-block;
+}

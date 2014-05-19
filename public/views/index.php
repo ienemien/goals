@@ -8,11 +8,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-	<style>
-		body 		{ padding-top:30px; }
-		form 		{ padding-bottom:20px; }
-		.comment 	{ padding-bottom:20px; }
-	</style>
+	<link rel="stylesheet" href="css/style.css"> 
 
 	<!-- JS -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -22,6 +18,7 @@
 	<!-- all angular resources will be loaded from the /public folder -->
 		<script src="js/controllers/mainCtrl.js"></script> <!-- load our controller -->
 		<script src="js/services/goalService.js"></script> <!-- load our service -->
+		<!-- <script src="js/directives/goalDirectives.js"></script> -->
 		<script src="js/app.js"></script> <!-- load our application -->
 
 </head>
@@ -72,7 +69,7 @@
 		</thead>
 		<tbody class="goal" ng-hide="loading" ng-repeat="goal in goals | filter:criteria">
 			<td>{{ goal.id }}</td>
-				<td contenteditable="true" ng-blur="editTitle(goal.id, goal.title)" ng-model="goal.title"><span ng-bind="goal.title"></span></td>
+				<td> <edit-inline value="goal.title"></edit-inline></td>
 				<td><input type="checkbox" name="done" ng-checked="{{ goal.done }}" ng-click="setDone(goal.id, goal.done)"></td>
 			<td><button class="btn btn-primary" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
 		</tbody>

@@ -129,5 +129,55 @@ angular.module('mainCtrl', [])
 				});
 		};
 
+	}) //end of controller
+	
+	.directive("editInline", function($compile) {
+		return {
+			restrict: "E",
+			scope: {
+				value: '='
+			},
+			template: '<span ng-click="edit(goal.id)" ng-bind="value"></span><input ng-model="value" ng-blur="setTitle()"></input>',
+			link: function ( $scope, element, attrs ) {
+		      // Let's get a reference to the input element, as we'll want to reference it.
+		      var inputElement = angular.element( element.children()[1] );
+		      
+		      // This directive should have a set class so we can style it.
+		      element.addClass( 'edit-inline' );
+		      
+		      // Not editing
+		      $scope.editing = false;
+		      
+		      // ng-click handler to activate edit-in-place
+		      $scope.edit = function (id) {
+		      	
+		        $scope.editing = true;
+		        alert(id);
+		        
+		        // We control display through a class on the directive itself. See the CSS.
+		        element.addClass( 'active' );
+		        
+		        // And we must focus the element. 
+		        inputElement[0].focus();
+		      };
+		      
+		      $scope.setTitle = function(id) {
+		      	var newVal = inputElement.val();
+		    	alert(newVal);
+		    	alert(id);
+        		$scope.editing = false;
+        		element.removeClass( 'active' );
+		      };
+		      
+		      // When we leave the input, we're done editing.
+		    	/*inputElement.blur(function() {
+		    		var newVal = inputElement.val();
+		    		alert(newVal);
+		    		alert(goal.id);
+        			$scope.editing = false;
+        			element.removeClass( 'active' );
+      			});*/
+    		}
+		};
 	});
 	

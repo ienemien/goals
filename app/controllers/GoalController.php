@@ -21,9 +21,16 @@ class GoalController extends \BaseController {
 	 */
 	public function store()
 	{
+		//If done is net set, set to false
+		if(Input::has('done')) {
+			$done = Input::get('done');
+		} else {
+			$done = false;
+		}
+		
 		Goal::create(array(
 			'title' => Input::get('title'),
-			'done' => Input::get('done')
+			'done' => $done
 		));
 
 		return Response::json(array('success' => true));

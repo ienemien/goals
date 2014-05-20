@@ -135,7 +135,7 @@ angular.module('mainCtrl', [])
 		return {
 			restrict: "E",
 			scope: {
-				value: '='
+				value: '=' //https://egghead.io/lessons/angularjs-understanding-isolate-scope
 			},
 			template: '<span ng-click="edit(goal.id)" ng-bind="value"></span><input ng-model="value" ng-blur="setTitle()"></input>',
 			link: function ( $scope, element, attrs ) {

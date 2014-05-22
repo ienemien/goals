@@ -135,7 +135,7 @@ angular.module('mainCtrl', [])
 			template: '<span ng-click="edit()">{{ goal.title }}</span>' + 
 			'<input name="newTitle" ng-model="goal.newTitle" value="{{goal.title}}" ng-blur="setTitle(goal.id, goal.newTitle)"></input>',
 			link: function ( scope, element, attrs ) {
-			
+				
 		      // Let's get a reference to the input element, as we'll want to reference it.
 		      var inputElement = angular.element( element.children()[1] );
 		      

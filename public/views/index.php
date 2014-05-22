@@ -69,7 +69,7 @@
 		</thead>
 		<tbody class="goal" ng-hide="loading" ng-repeat="goal in goals | filter:criteria">
 			<td>{{ goal.id }}</td>
-				<td> <edit-inline value="goal.title"></edit-inline></td>
+				<td> <edit-inline title="{{ goal.title }}" id="{{ goal.id }}"></edit-inline></td>
 				<td><input type="checkbox" name="done" ng-checked="{{ goal.done }}" ng-click="setDone(goal.id, goal.done)"></td>
 			<td><button class="btn btn-primary" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
 		</tbody>

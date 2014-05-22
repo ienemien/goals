@@ -48,16 +48,14 @@ angular.module('mainCtrl', [])
 				});
 		};
 		
-		// function to change the title of an existing goal
-		// SET TITLE ======================================================
-		/*$scope.editTitle = function(id, newtitle) {
-			$scope.loading = true;
-			$scope.newData.id = id;
-			$scope.newData.title = newtitle;
-			alert($scope.newData.id);
-			alert($scope.newData.title);
-			// save the goal
-			Goal.update(id, $scope.goalData)
+		//UPDATE TITLE
+		$scope.setTitle = function(id, newTitle) {
+				$scope.loading = true;
+				$scope.newData.title = newTitle;
+
+			// save the goal. pass in goal data from the form
+			// use the function we created in our service
+			Goal.update(id, $scope.newData)
 				.success(function(data) {
 
 					// if successful, we'll need to refresh the Goal list
@@ -71,7 +69,7 @@ angular.module('mainCtrl', [])
 				.error(function(data) {
 					console.log(data);
 				});
-		};*/
+		};
 		
 		// function to set a goal as 'done'
 		// SET DONE ======================================================
@@ -90,7 +88,6 @@ angular.module('mainCtrl', [])
 				
 				toggleDone(done);
 				$scope.newData.done = nowdone;
-				//$scope.goalData.id = id;
 
 			// save the goal. pass in goal data from the form
 			// use the function we created in our service
@@ -131,14 +128,14 @@ angular.module('mainCtrl', [])
 
 	}) //end of controller
 	
-	.directive("editInline", function($compile) {
+	.directive("editInline", function() {
 		return {
 			restrict: "E",
-			scope: {
-				value: '='
-			},
-			template: '<span ng-click="edit(goal.id)" ng-bind="value"></span><input ng-model="value" ng-blur="setTitle()"></input>',
-			link: function ( $scope, element, attrs ) {
+			scope: true,
+			template: '<span ng-click="edit()">{{ goal.title }}</span>' + 
+			'<input name="newTitle" ng-model="goal.newTitle" value="{{goal.title}}" ng-blur="setTitle(goal.id, goal.newTitle)"></input>',
+			link: function ( scope, element, attrs ) {
+			
 		      // Let's get a reference to the input element, as we'll want to reference it.
 		      var inputElement = angular.element( element.children()[1] );
 		      
@@ -146,37 +143,18 @@ angular.module('mainCtrl', [])
 		      element.addClass( 'edit-inline' );
 		      
 		      // Not editing
-		      $scope.editing = false;
+		      scope.editing = false;
 		      
-		      // ng-click handler to activate edit-in-place
-		      $scope.edit = function (id) {
-		      	
-		        $scope.editing = true;
-		        alert(id);
+		      // ng-click handler to activate edit-inline
+		      scope.edit = function () {
+		        scope.editing = true;
 		        
-		        // We control display through a class on the directive itself. See the CSS.
+		        // Control display through a class on the directive itself
 		        element.addClass( 'active' );
 		        
 		        // And we must focus the element. 
 		        inputElement[0].focus();
 		      };
-		      
-		      $scope.setTitle = function(id) {
-		      	var newVal = inputElement.val();
-		    	alert(newVal);
-		    	alert(id);
-        		$scope.editing = false;
-        		element.removeClass( 'active' );
-		      };
-		      
-		      // When we leave the input, we're done editing.
-		    	/*inputElement.blur(function() {
-		    		var newVal = inputElement.val();
-		    		alert(newVal);
-		    		alert(goal.id);
-        			$scope.editing = false;
-        			element.removeClass( 'active' );
-      			});*/
     		}
 		};
 	});

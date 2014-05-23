@@ -21,6 +21,18 @@ class GoalController extends \BaseController {
 	 */
 	public function store()
 	{
+		//get data
+		$data = Input::all();
+			
+		//set validation rules
+		$rules = array(
+                'title' => 'Required|Min:3|Max:50|AlphaNum'
+        );
+		
+		// Create a new validator instance.
+    	$validator = Validator::make($data, $rules);
+		$errors = $this->validator->errors()->all();
+		
 		//If done is net set, set to false
 		if(Input::has('done')) {
 			$done = Input::get('done');
@@ -28,13 +40,19 @@ class GoalController extends \BaseController {
 			$done = false;
 		}
 		
-		Goal::create(array(
+		//only create new goal if validator passes
+		if ($validator->passes()) {
+        	Goal::create(array(
 			'title' => Input::get('title'),
 			'done' => $done
-		));
-
-		return Response::json(array('success' => true));
-	}
+			));
+			
+			//return success message to angular
+			return Response::json(array('success' => true));
+    	} else {
+    		return Response::json(array('errors' => $errors));
+    	}
+	} //end of store function
 	
 	/**
 	 * Update goal in storage

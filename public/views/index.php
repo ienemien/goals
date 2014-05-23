@@ -38,13 +38,13 @@
 		<div class="form-group" ng-class="{'has-error': goalform.title.$dirty && goalform.title.$invalid, 'has-success': goalform.title.$dirty && goalform.title.$valid}">
 			<label class="control-label">Set your goal:</label>
 			<input type="text" class="form-control input-sm" name="title" ng-model="goalData.title" placeholder="Title" required ng-minlength=3 ng-maxlength=50>
-				<p class="help-block bg-danger" ng-show="goalform.title.$error.required && !goalform.title.$pristine">
+				<p class="help-block bg-error" ng-show="goalform.title.$error.required && !goalform.title.$pristine">
 					Please add a goal.
 				</p>
-				<p class="help-block bg-danger" ng-show="goalform.title.$error.minlength && !goalform.title.$pristine">
+				<p class="help-block bg-error" ng-show="goalform.title.$error.minlength && !goalform.title.$pristine">
 					Your goal should have at least 3 characters.
 				</p>
-				<p class="help-block bg-danger" ng-show="goalform.title.$error.maxlength && !goalform.title.$pristine">
+				<p class="help-block bg-error" ng-show="goalform.title.$error.maxlength && !goalform.title.$pristine">
 					Your goal can only have up to 50 characters.
 				</p>
 		</div>

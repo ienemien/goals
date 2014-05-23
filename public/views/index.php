@@ -6,8 +6,8 @@
 	<title>Laravel and Angular Goal App</title>
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
 	<link rel="stylesheet" href="css/style.css"> 
 
 	<!-- JS -->
@@ -16,13 +16,12 @@
 
 	<!-- ANGULAR -->
 	<!-- all angular resources will be loaded from the /public folder -->
-		<script src="js/controllers/mainCtrl.js"></script> <!-- load our controller -->
-		<script src="js/services/goalService.js"></script> <!-- load our service -->
-		<!-- <script src="js/directives/goalDirectives.js"></script> -->
-		<script src="js/app.js"></script> <!-- load our application -->
+	<script src="js/controllers/mainCtrl.js"></script>
+	<script src="js/services/goalService.js"></script> 
+	<script src="js/app.js"></script> 
 
 </head>
-<!-- declare our angular app and controller -->
+<!-- declare angular app and controller -->
 <body class="container" ng-app="goalApp" ng-controller="mainController">
 <div class="col-md-8 col-md-offset-2">
 
@@ -33,11 +32,21 @@
 	</div>
 
 	<!-- NEW GOAL FORM =============================================== -->
-	<form ng-submit="submitGoal()"> <!-- ng-submit will disable the default form action and use our function -->
+	<form name="goalform" novalidate ng-submit="submitGoal()">
 
 		<!-- Goal Title -->
-		<div class="form-group">
-			<input type="text" class="form-control input-sm" name="title" ng-model="goalData.title" placeholder="Title">
+		<div class="form-group" ng-class="{'has-error': goalform.title.$dirty && goalform.title.$invalid, 'has-success': goalform.title.$dirty && goalform.title.$valid}">
+			<label class="control-label">Set your goal:</label>
+			<input type="text" class="form-control input-sm" name="title" ng-model="goalData.title" placeholder="Title" required ng-minlength=3 ng-maxlength=50>
+				<p class="help-block bg-danger" ng-show="goalform.title.$error.required && !goalform.title.$pristine">
+					Please add a goal.
+				</p>
+				<p class="help-block bg-danger" ng-show="goalform.title.$error.minlength && !goalform.title.$pristine">
+					Your goal should have at least 3 characters.
+				</p>
+				<p class="help-block bg-danger" ng-show="goalform.title.$error.maxlength && !goalform.title.$pristine">
+					Your goal can only have up to 50 characters.
+				</p>
 		</div>
 
 		<!-- Goal done? -->
@@ -49,7 +58,7 @@
 		
 		<!-- SUBMIT BUTTON -->
 		<div class="form-group text-right">
-			<button type="submit" class="btn btn-primary btn-lg">Create</button>
+			<button type="submit" class="btn btn-primary" ng-class="{'disabled': goalform.title.$dirty && goalform.title.$invalid, 'active': goalform.title.$dirty && goalform.title.$valid}">Create</button>
 		</div>
 	</form>
 
@@ -71,7 +80,7 @@
 			<td>{{ goal.id }}</td>
 				<td> <edit-inline title="{{ goal.title }}" id="{{ goal.id }}"></edit-inline></td>
 				<td><input type="checkbox" name="done" ng-checked="{{ goal.done }}" ng-click="setDone(goal.id, goal.done)"></td>
-			<td><button class="btn btn-primary" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
+			<td><button class="btn btn-xs" href="#" ng-click="deleteGoal(goal.id)" class="text-muted">Delete</a></td>
 		</tbody>
 	</table>
 

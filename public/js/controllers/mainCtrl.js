@@ -133,13 +133,13 @@ angular.module('mainCtrl', [])
 			restrict: "E",
 			scope: true,
 			template: '<span ng-click="edit()">{{ goal.title }}</span>' + 
-			'<input name="newTitle" ng-model="goal.newTitle" value="{{goal.title}}" ng-blur="setTitle(goal.id, goal.newTitle)"></input>',
+			'<input name="newTitle" ng-model="goal.newTitle" placeholder="{{goal.title}}" ng-blur="setTitle(goal.id, goal.newTitle)"></input>',
 			link: function ( scope, element, attrs ) {
 				
-		      // Let's get a reference to the input element, as we'll want to reference it.
+		      // Save reference to input element
 		      var inputElement = angular.element( element.children()[1] );
 		      
-		      // This directive should have a set class so we can style it.
+		      // Adds class that can be edited when the span is clicked
 		      element.addClass( 'edit-inline' );
 		      
 		      // Not editing

@@ -1,6 +1,8 @@
 body { padding-top:30px; }
 form { padding-bottom:20px; }
 
+
+/* Styling for controlling the editInline directive */
 .edit-inline span {
   cursor: pointer;
 }
@@ -15,4 +17,9 @@ form { padding-bottom:20px; }
 
 .edit-inline.active input {
   display: inline-block;
+}
+
+.help-block {
+	font-size: 10px;
+	padding: 5px;
 }
